@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lombok-presence-check-parent</artifactId>
+        <groupId>com.github.kokorin</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>lombok-presence-check</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>lombok</groupId>
+            <artifactId>lombok-unpacked</artifactId>
+            <version>${lombok.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kohsuke.metainf-services</groupId>
+            <artifactId>metainf-services</artifactId>
+            <version>1.8</version>
+        </dependency>
+    </dependencies>
+
+    <!-- <profiles>
+         <profile>
+             <id>default-tools.jar</id>
+             <activation>
+                 <property>
+                     <name>java.vendor</name>
+                     &lt;!&ndash;<value>Oracle Corporation</value>&ndash;&gt;
+                     <value>AdoptOpenJDK</value>
+                 </property>
+             </activation>
+             <dependencies>
+                 <dependency>
+                     <groupId>com.sun</groupId>
+                     <artifactId>tools</artifactId>
+                     <version>${java.version}</version>
+                     <scope>system</scope>
+                     <systemPath>${java.home}/../lib/tools.jar</systemPath>
+                 </dependency>
+             </dependencies>
+         </profile>
+     </profiles>
+ -->
+</project>
