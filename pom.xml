@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.kokorin</groupId>
-    <artifactId>lombok-presence-check-parent</artifactId>
+    <artifactId>lombok-presence-checker-parent</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
         <module>lombok-unpacked</module>
-        <module>lombok-presence-check</module>
+        <module>lombok-presence-checker</module>
     </modules>
 
     <properties>
