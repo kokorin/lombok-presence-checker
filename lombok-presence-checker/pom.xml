@@ -11,13 +11,12 @@
 
     <artifactId>lombok-presence-checker</artifactId>
 
-    <repositories>
-        <repository>
-            <!-- To add com.sun.tools-->
-            <id>icm.edu.pl</id>
-            <url>http://maven.icm.edu.pl/artifactory/repo/</url>
-        </repository>
-    </repositories>
+    <properties>
+        <javac-tools.version>1.6.0.18</javac-tools.version>
+        <javac-tools.jar>javac-${javac-tools.version}.jar</javac-tools.jar>
+        <javac-tools.dir>${project.build.directory}/download</javac-tools.dir>
+        <javac-tools.path>${javac-tools.dir}/${javac-tools.jar}</javac-tools.path>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -28,19 +27,61 @@
         </dependency>
 
         <dependency>
+            <groupId>com.sun.tools</groupId>
+            <artifactId>javac</artifactId>
+            <version>${javac-tools.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--<dependency>
             <groupId>org.kohsuke.metainf-services</groupId>
             <artifactId>metainf-services</artifactId>
             <version>1.8</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sun.java</groupId>
-            <artifactId>tools</artifactId>
-            <version>11.0.1</version>
-            <scope>compile</scope>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <version>1.3.0</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>https://projectlombok.org/ivyrepo/langtools/${javac-tools.jar}</url>
+                            <outputFileName>${javac-tools.jar}</outputFileName>
+                            <outputDirectory>${javac-tools.dir}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <executions>
+                    <execution>
+                        <id>install-javac-tools</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>com.sun.tools</groupId>
+                            <artifactId>javac</artifactId>
+                            <version>${javac-tools.version}</version>
+                            <packaging>jar</packaging>
+                            <file>${javac-tools.path}</file>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
     <!--<profiles>
         <profile>
             <id>default-tools.jar</id>
