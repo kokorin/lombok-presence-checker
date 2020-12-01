@@ -11,6 +11,14 @@
 
     <artifactId>lombok-presence-checker</artifactId>
 
+    <repositories>
+        <repository>
+            <!-- To add com.sun.tools-->
+            <id>icm.edu.pl</id>
+            <url>http://maven.icm.edu.pl/artifactory/repo/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>lombok</groupId>
@@ -24,28 +32,34 @@
             <artifactId>metainf-services</artifactId>
             <version>1.8</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.sun.java</groupId>
+            <artifactId>tools</artifactId>
+            <version>11.0.1</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
-    <!-- <profiles>
-         <profile>
-             <id>default-tools.jar</id>
-             <activation>
-                 <property>
-                     <name>java.vendor</name>
-                     &lt;!&ndash;<value>Oracle Corporation</value>&ndash;&gt;
-                     <value>AdoptOpenJDK</value>
-                 </property>
-             </activation>
-             <dependencies>
-                 <dependency>
-                     <groupId>com.sun</groupId>
-                     <artifactId>tools</artifactId>
-                     <version>${java.version}</version>
-                     <scope>system</scope>
-                     <systemPath>${java.home}/../lib/tools.jar</systemPath>
-                 </dependency>
-             </dependencies>
-         </profile>
-     </profiles>
- -->
+    <!--<profiles>
+        <profile>
+            <id>default-tools.jar</id>
+            <activation>
+                <property>
+                    <name>java.vendor</name>
+                    &lt;!&ndash;<value>Oracle Corporation</value>&ndash;&gt;
+                    <value>AdoptOpenJDK</value>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sun</groupId>
+                    <artifactId>tools</artifactId>
+                    <version>${java.version}</version>
+                    <scope>system</scope>
+                    <systemPath>${java.home}/../lib/tools.jar</systemPath>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>-->
 </project>
