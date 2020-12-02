@@ -6,8 +6,6 @@ import java.lang.annotation.Target;
 /**
  * Put on any field to make lombok build a presence checker.
  * <p>
- * Complete documentation is found at <a href="https://projectlombok.org/features/PresenceChecker">the project lombok features page for &#64;Getter and &#64;PresenceChecker</a>.
- * <p>
  * Example:
  * <pre>
  *     private &#64;PresenceChecker @Setter String foo;

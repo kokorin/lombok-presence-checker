@@ -12,31 +12,40 @@
     <artifactId>lombok-presence-checker</artifactId>
 
     <properties>
-        <javac-tools.version>1.6.0.18</javac-tools.version>
-        <javac-tools.jar>javac-${javac-tools.version}.jar</javac-tools.jar>
-        <javac-tools.dir>${project.build.directory}/download</javac-tools.dir>
-        <javac-tools.path>${javac-tools.dir}/${javac-tools.jar}</javac-tools.path>
+        <download.dir>${project.build.directory}/download</download.dir>
+        <javac.version>1.6.0.18</javac.version>
+        <javac.jar>javac-${javac.version}.jar</javac.jar>
+        <javac.path>${download.dir}/${javac.jar}</javac.path>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>lombok</groupId>
-            <artifactId>lombok-unpacked</artifactId>
+            <artifactId>lombok-unshaded</artifactId>
             <version>${lombok.version}</version>
-            <scope>compile</scope>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
             <groupId>com.sun.tools</groupId>
             <artifactId>javac</artifactId>
-            <version>${javac-tools.version}</version>
-            <scope>compile</scope>
+            <version>${javac.version}</version>
+            <optional>true</optional>
         </dependency>
+
         <!--<dependency>
+            <groupId>org.eclipse.jdt</groupId>
+            <artifactId>core</artifactId>
+            <version>3.3.0-v_771</version>
+            <optional>true</optional>
+        </dependency>-->
+
+        <dependency>
             <groupId>org.kohsuke.metainf-services</groupId>
             <artifactId>metainf-services</artifactId>
             <version>1.8</version>
-        </dependency>-->
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <build>
@@ -52,9 +61,9 @@
                             <goal>wget</goal>
                         </goals>
                         <configuration>
-                            <url>https://projectlombok.org/ivyrepo/langtools/${javac-tools.jar}</url>
-                            <outputFileName>${javac-tools.jar}</outputFileName>
-                            <outputDirectory>${javac-tools.dir}</outputDirectory>
+                            <url>https://projectlombok.org/ivyrepo/langtools/${javac.jar}</url>
+                            <outputFileName>${javac.jar}</outputFileName>
+                            <outputDirectory>${download.dir}</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
@@ -73,34 +82,38 @@
                         <configuration>
                             <groupId>com.sun.tools</groupId>
                             <artifactId>javac</artifactId>
-                            <version>${javac-tools.version}</version>
+                            <version>${javac.version}</version>
                             <packaging>jar</packaging>
-                            <file>${javac-tools.path}</file>
+                            <file>${javac.path}</file>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>shade-lombok-classes</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+
+                        <configuration>
+                            <target>
+                                <move todir="${project.build.directory}/classes/" includeemptydirs="false">
+                                    <fileset dir="${project.build.directory}/classes/">
+                                        <include name="com/github/kokorin/lombok/javac/**/*.class"/>
+                                    </fileset>
+                                    <mapper type="glob" from="*.class" to="*.SCL.lombok"/>
+                                </move>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
-    <!--<profiles>
-        <profile>
-            <id>default-tools.jar</id>
-            <activation>
-                <property>
-                    <name>java.vendor</name>
-                    &lt;!&ndash;<value>Oracle Corporation</value>&ndash;&gt;
-                    <value>AdoptOpenJDK</value>
-                </property>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.sun</groupId>
-                    <artifactId>tools</artifactId>
-                    <version>${java.version}</version>
-                    <scope>system</scope>
-                    <systemPath>${java.home}/../lib/tools.jar</systemPath>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>-->
 </project>

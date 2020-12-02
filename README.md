@@ -8,3 +8,4 @@ Some dependencies have to be installed to local Maven repository before compilat
 `mvn initialize` This command will download & install
 
 `mvn` To build project
+

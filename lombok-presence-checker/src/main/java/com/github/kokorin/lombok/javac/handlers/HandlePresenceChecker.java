@@ -6,7 +6,6 @@ import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.util.List;
 import com.sun.tools.javac.util.Name;
 import lombok.AccessLevel;
-import lombok.ConfigurationKeys;
 import lombok.core.AST;
 import lombok.core.AnnotationValues;
 import lombok.core.HandlerPriority;
@@ -14,17 +13,19 @@ import lombok.core.handlers.HandlerUtil;
 import lombok.javac.JavacAnnotationHandler;
 import lombok.javac.JavacNode;
 import lombok.javac.JavacTreeMaker;
+import org.kohsuke.MetaInfServices;
 
 import java.util.Collection;
 
-import static lombok.core.handlers.HandlerUtil.handleFlagUsage;
+import static com.github.kokorin.lombok.javac.handlers.JavacHandlerUtil.createFieldAccessor;
+import static com.github.kokorin.lombok.javac.handlers.JavacHandlerUtil.toHasName;
 import static lombok.javac.Javac.CTC_BOOLEAN;
 import static lombok.javac.handlers.JavacHandlerUtil.*;
-import static com.github.kokorin.lombok.javac.handlers.JavacHandlerUtil.*;
 
 /**
  * Handles the {@code PresenceChecker} annotation for javac.
  */
+@MetaInfServices
 @HandlerPriority(128) // we must run AFTER HandleSetter which is at 0 (default value)
 public class HandlePresenceChecker extends JavacAnnotationHandler<PresenceChecker> {
     @Override

@@ -10,15 +10,36 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
-        <module>lombok-unpacked</module>
+        <module>lombok-unshaded</module>
         <module>lombok-presence-checker</module>
+        <module>lombok-presence-checker-test</module>
     </modules>
 
     <properties>
         <lombok.version>1.18.10</lombok.version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>1.8</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

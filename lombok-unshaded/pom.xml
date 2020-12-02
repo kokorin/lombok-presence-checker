@@ -10,15 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>lombok</groupId>
-    <artifactId>lombok-unpacked</artifactId>
+    <artifactId>lombok-unshaded</artifactId>
     <version>${lombok.version}</version>
 
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -29,19 +27,19 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>unpack</id>
+                        <id>unpack-lombok</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>unpack</goal>
                         </goals>
+
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>org.projectlombok</groupId>
                                     <artifactId>lombok</artifactId>
-                                    <version>${lombok.version}</version>
                                     <outputDirectory>${project.build.directory}/unpack</outputDirectory>
-                                    <includes>lombok/**</includes>
+                                    <!--<includes>lombok/**</includes>-->
                                     <overWrite>true</overWrite>
                                 </artifactItem>
                             </artifactItems>
@@ -53,10 +51,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.8</version>
                 <executions>
                     <execution>
-                        <id>rename-file</id>
+                        <id>unshade-lombok</id>
                         <phase>compile</phase>
                         <goals>
                             <goal>run</goal>
@@ -64,13 +61,12 @@
 
                         <configuration>
                             <target>
-                                <!--<mkdir dir="${project.build.directory}/classes/"/>-->
-                                <move todir="${project.build.directory}/classes/" includeemptydirs="false">
+                                <copy todir="${project.build.directory}/classes/" includeemptydirs="false">
                                     <fileset dir="${project.build.directory}/unpack/">
                                         <include name="**/*.lombok"/>
                                     </fileset>
                                     <mapper type="glob" from="*.SCL.lombok" to="*.class"/>
-                                </move>
+                                </copy>
                             </target>
                         </configuration>
                     </execution>
