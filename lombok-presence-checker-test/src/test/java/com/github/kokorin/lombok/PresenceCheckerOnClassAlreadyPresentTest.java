@@ -8,7 +8,7 @@ import org.junit.Test;
 @PresenceChecker
 @Getter
 @Setter
-public class PresenceCheckerAlreadyPresentTest {
+public class PresenceCheckerOnClassAlreadyPresentTest {
     private boolean hasName = false;
     private String name;
 
@@ -27,7 +27,7 @@ public class PresenceCheckerAlreadyPresentTest {
 
     @Test
     public void noErrorsDuringCompilation() {
-        PresenceCheckerAlreadyPresentTest pc = new PresenceCheckerAlreadyPresentTest();
+        PresenceCheckerOnClassAlreadyPresentTest pc = new PresenceCheckerOnClassAlreadyPresentTest();
         Assert.assertFalse(pc.hasName());
         pc.setName("any");
         Assert.assertTrue(pc.hasName());
