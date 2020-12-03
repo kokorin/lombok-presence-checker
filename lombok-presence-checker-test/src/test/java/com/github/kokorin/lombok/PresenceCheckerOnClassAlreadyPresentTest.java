@@ -21,16 +21,15 @@ public class PresenceCheckerOnClassAlreadyPresentTest {
         this.hasName = true;
     }
 
-    private boolean hasName() {
+    public boolean hasName() {
         return hasName;
     }
 
     @Test
     public void noErrorsDuringCompilation() {
-        PresenceCheckerOnClassAlreadyPresentTest pc = new PresenceCheckerOnClassAlreadyPresentTest();
-        Assert.assertFalse(pc.hasName());
-        pc.setName("any");
-        Assert.assertTrue(pc.hasName());
+        Assert.assertFalse(this.hasName());
+        this.setName("any");
+        Assert.assertTrue(this.hasName());
     }
 
 }

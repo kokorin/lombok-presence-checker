@@ -17,9 +17,8 @@ public class PresenceCheckerOnFieldTest {
 
     @Test
     public void test() {
-        PresenceCheckerOnFieldTest pc = new PresenceCheckerOnFieldTest();
-        Assert.assertFalse(pc.hasName());
-        pc.setName("any");
-        Assert.assertTrue(pc.hasName());
+        Assert.assertFalse(this.hasName());
+        this.setName("any");
+        Assert.assertTrue(this.hasName());
     }
 }

@@ -1,6 +1,5 @@
 package com.github.kokorin.lombok;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class PresenceCheckerOnStaticFieldHasNoEffectTest {
@@ -15,8 +14,8 @@ public class PresenceCheckerOnStaticFieldHasNoEffectTest {
         PresenceCheckerOnStaticFieldHasNoEffectTest.name = name;
     }
 
-    @Test
-    public void test() {
-        Assert.fail("TO BE IMPLEMENTED");
+    @Test(expected = NoSuchMethodException.class)
+    public void test() throws Exception {
+        this.getClass().getMethod("hasName");
     }
 }

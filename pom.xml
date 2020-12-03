@@ -16,7 +16,7 @@
     </modules>
 
     <properties>
-        <lombok.version>1.18.10</lombok.version>
+        <lombok.version>1.18.16</lombok.version>
     </properties>
 
     <dependencyManagement>

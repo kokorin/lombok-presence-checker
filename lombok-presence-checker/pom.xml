@@ -20,7 +20,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>lombok</groupId>
+            <groupId>org.projectlombok</groupId>
             <artifactId>lombok-unshaded</artifactId>
             <version>${lombok.version}</version>
             <optional>true</optional>
@@ -106,6 +106,7 @@
                                 <move todir="${project.build.directory}/classes/" includeemptydirs="false">
                                     <fileset dir="${project.build.directory}/classes/">
                                         <include name="com/github/kokorin/lombok/javac/**/*.class"/>
+                                        <include name="lombok/javac/**/*.class"/>
                                     </fileset>
                                     <mapper type="glob" from="*.class" to="*.SCL.lombok"/>
                                 </move>

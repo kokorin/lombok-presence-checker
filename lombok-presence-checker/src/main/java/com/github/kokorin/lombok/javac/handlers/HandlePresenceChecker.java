@@ -26,7 +26,7 @@ import static lombok.javac.handlers.JavacHandlerUtil.*;
  * Handles the {@code PresenceChecker} annotation for javac.
  */
 @MetaInfServices
-@HandlerPriority(128) // we must run AFTER HandleSetter which is at 0 (default value)
+@HandlerPriority(value = 0, subValue = 1) // we must run AFTER HandleSetter which is at 0 (default value)
 public class HandlePresenceChecker extends JavacAnnotationHandler<PresenceChecker> {
     @Override
     public void handle(AnnotationValues<PresenceChecker> annotation, JCTree.JCAnnotation ast, JavacNode annotationNode) {
@@ -101,6 +101,10 @@ public class HandlePresenceChecker extends JavacAnnotationHandler<PresenceChecke
             return;
         }
 
+        if (isHasMethodForFieldAlreadyPresent(fieldNode)) {
+            return;
+        }
+
         JavacTreeMaker treeMaker = fieldNode.getTreeMaker();
 
         JavacNode setterMethod = findSetterForField(fieldNode);
@@ -110,7 +114,7 @@ public class HandlePresenceChecker extends JavacAnnotationHandler<PresenceChecke
         }
 
         JCTree.JCVariableDecl presenceCheckerFieldDecl = createPresenceCheckerField(fieldNode, treeMaker);
-        JavacNode presenceCheckerField = injectFieldAndMarkGenerated(fieldNode.up(), presenceCheckerFieldDecl);
+        JavacNode presenceCheckerField = injectField(fieldNode.up(), presenceCheckerFieldDecl);
 
         JCTree.JCMethodDecl presenceCheckerMethod = createPresenceCheckerMethod(presenceCheckerField, treeMaker);
         injectMethod(fieldNode.up(), presenceCheckerMethod);
@@ -132,10 +136,6 @@ public class HandlePresenceChecker extends JavacAnnotationHandler<PresenceChecke
         Name methodName = presenceCheckerField.toName(presenceCheckerField.getName());
 
         List<JCTree.JCStatement> statements;
-        JCTree toClearOfMarkers = null;
-        if (!inNetbeansEditor(presenceCheckerField)) {
-            toClearOfMarkers = fieldNode.init;
-        }
 
         statements = createPresenceCheckerBody(treeMaker, presenceCheckerField);
 
@@ -146,7 +146,7 @@ public class HandlePresenceChecker extends JavacAnnotationHandler<PresenceChecke
         List<JCTree.JCExpression> throwsClauses = List.nil();
         JCTree.JCExpression annotationMethodDefaultValue = null;
 
-        JCTree.JCMethodDecl decl = recursiveSetGeneratedBy(
+        /*JCTree.JCMethodDecl decl = recursiveSetGeneratedBy(
                 treeMaker.MethodDef(
                         treeMaker.Modifiers(access, List.<JCTree.JCAnnotation>nil()),
                         methodName,
@@ -159,9 +159,18 @@ public class HandlePresenceChecker extends JavacAnnotationHandler<PresenceChecke
                 ),
                 source,
                 presenceCheckerField.getContext()
-        );
+        );*/
 
-        if (toClearOfMarkers != null) recursiveSetGeneratedBy(toClearOfMarkers, null, null);
+        JCTree.JCMethodDecl decl = treeMaker.MethodDef(
+                        treeMaker.Modifiers(access, List.<JCTree.JCAnnotation>nil()),
+                        methodName,
+                        methodType,
+                        methodGenericParams,
+                        parameters,
+                        throwsClauses,
+                        methodBody,
+                        annotationMethodDefaultValue
+                );
 
         return decl;
     }
@@ -186,6 +195,19 @@ public class HandlePresenceChecker extends JavacAnnotationHandler<PresenceChecke
         List<JCTree.JCStatement> updatedStatements = List.of(setPresenceStatement).prependList(body.stats);
 
         setterMethod.body = treeMaker.Block(body.flags, updatedStatements);
+    }
+
+    private boolean isHasMethodForFieldAlreadyPresent(JavacNode fieldNode) {
+        String hasName = toHasName(fieldNode);
+
+        if (hasName != null) {
+            for (JavacNode node : fieldNode.up().down()) {
+                if (node.getKind() == AST.Kind.METHOD && hasName.equals(node.getName())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private JavacNode findSetterForField(JavacNode fieldNode) {

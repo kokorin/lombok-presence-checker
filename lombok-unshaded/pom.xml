@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>lombok</groupId>
+    <groupId>org.projectlombok</groupId>
     <artifactId>lombok-unshaded</artifactId>
     <version>${lombok.version}</version>
 

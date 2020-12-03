@@ -13,9 +13,8 @@ public class PresenceCheckerOnFieldWithSetterTest {
 
     @Test
     public void test() {
-        PresenceCheckerOnFieldWithSetterTest pc = new PresenceCheckerOnFieldWithSetterTest();
-        Assert.assertFalse(pc.hasName());
-        pc.setName("any");
-        Assert.assertTrue(pc.hasName());
+        Assert.assertFalse(this.hasName());
+        this.setName("any");
+        Assert.assertTrue(this.hasName());
     }
 }

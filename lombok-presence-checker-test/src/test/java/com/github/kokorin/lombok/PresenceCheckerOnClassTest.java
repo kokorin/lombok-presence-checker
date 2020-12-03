@@ -17,9 +17,8 @@ public class PresenceCheckerOnClassTest {
 
     @Test
     public void test() {
-        PresenceCheckerOnClassTest pc = new PresenceCheckerOnClassTest();
-        Assert.assertFalse(pc.hasName());
-        pc.setName("any");
-        Assert.assertTrue(pc.hasName());
+        Assert.assertFalse(this.hasName());
+        this.setName("any");
+        Assert.assertTrue(this.hasName());
     }
 }

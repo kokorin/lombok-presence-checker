@@ -27,10 +27,9 @@ public class PresenceCheckerOnFieldAlreadyPresentTest {
 
     @Test
     public void noErrorsDuringCompilation() {
-        PresenceCheckerOnFieldAlreadyPresentTest pc = new PresenceCheckerOnFieldAlreadyPresentTest();
-        Assert.assertFalse(pc.hasName());
-        pc.setName("any");
-        Assert.assertTrue(pc.hasName());
+        Assert.assertFalse(this.hasName());
+        this.setName("any");
+        Assert.assertTrue(this.hasName());
     }
 
 }
