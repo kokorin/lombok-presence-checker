@@ -2,6 +2,7 @@ package com.github.kokorin.lombok.javac.handlers;
 
 import com.github.kokorin.lombok.PresenceChecker;
 import com.sun.tools.javac.code.Flags;
+import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.util.List;
 import com.sun.tools.javac.util.Name;
@@ -115,9 +116,10 @@ public class HandlePresenceChecker extends JavacAnnotationHandler<PresenceChecke
 
         JCTree.JCVariableDecl presenceCheckerFieldDecl = createPresenceCheckerField(fieldNode, treeMaker);
         JavacNode presenceCheckerField = injectField(fieldNode.up(), presenceCheckerFieldDecl);
-
+        Type booleanType = treeMaker.Literal(false).type;
         JCTree.JCMethodDecl presenceCheckerMethod = createPresenceCheckerMethod(presenceCheckerField, treeMaker);
-        injectMethod(fieldNode.up(), presenceCheckerMethod);
+        injectMethod(fieldNode.up(), presenceCheckerMethod, List.<Type>nil(), booleanType);
+        //injectMethod(fieldNode.up(), presenceCheckerMethod, List.<Type>nil(), getMirrorForFieldType(fieldNode));
 
         JCTree.JCMethodDecl setterMethodDecl = (JCTree.JCMethodDecl) setterMethod.get();
 
@@ -175,10 +177,10 @@ public class HandlePresenceChecker extends JavacAnnotationHandler<PresenceChecke
         return decl;
     }
 
-    private JCTree.JCVariableDecl createPresenceCheckerField(JavacNode fieldNode, JavacTreeMaker maker) {
+    private JCTree.JCVariableDecl createPresenceCheckerField(JavacNode fieldNode, JavacTreeMaker treeMaker) {
         Name valueName = fieldNode.toName(toHasName(fieldNode));
 
-        return maker.VarDef(maker.Modifiers(Flags.PRIVATE), valueName, maker.TypeIdent(CTC_BOOLEAN), null);
+        return treeMaker.VarDef(treeMaker.Modifiers(Flags.PRIVATE), valueName, treeMaker.TypeIdent(CTC_BOOLEAN), null);
     }
 
     private List<JCTree.JCStatement> createPresenceCheckerBody(JavacTreeMaker treeMaker, JavacNode field) {
