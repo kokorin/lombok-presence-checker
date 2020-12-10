@@ -1,6 +1,8 @@
 package com.github.kokorin.lombok;
 
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
@@ -31,5 +33,6 @@ import java.lang.annotation.Target;
  * a {@code PresenceChecker} annotation have the annotation.
  */
 @Target({ElementType.TYPE, ElementType.FIELD})
+@Retention(RetentionPolicy.SOURCE)
 public @interface PresenceChecker {
 }

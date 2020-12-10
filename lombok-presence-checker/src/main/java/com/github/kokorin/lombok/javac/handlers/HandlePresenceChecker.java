@@ -116,10 +116,12 @@ public class HandlePresenceChecker extends JavacAnnotationHandler<PresenceChecke
 
         JCTree.JCVariableDecl presenceCheckerFieldDecl = createPresenceCheckerField(fieldNode, treeMaker);
         JavacNode presenceCheckerField = injectField(fieldNode.up(), presenceCheckerFieldDecl);
+        // TODO solution suggested in lombok google group doesn't work
+        // https://groups.google.com/g/project-lombok/c/58QRAyqg85Y/m/FXx_t7seAgAJ
+        //Type booleanType = fieldNode.getSymbolTable().booleanType;
         Type booleanType = treeMaker.Literal(false).type;
         JCTree.JCMethodDecl presenceCheckerMethod = createPresenceCheckerMethod(presenceCheckerField, treeMaker);
         injectMethod(fieldNode.up(), presenceCheckerMethod, List.<Type>nil(), booleanType);
-        //injectMethod(fieldNode.up(), presenceCheckerMethod, List.<Type>nil(), getMirrorForFieldType(fieldNode));
 
         JCTree.JCMethodDecl setterMethodDecl = (JCTree.JCMethodDecl) setterMethod.get();
 
@@ -148,7 +150,7 @@ public class HandlePresenceChecker extends JavacAnnotationHandler<PresenceChecke
         List<JCTree.JCExpression> throwsClauses = List.nil();
         JCTree.JCExpression annotationMethodDefaultValue = null;
 
-        /*JCTree.JCMethodDecl decl = recursiveSetGeneratedBy(
+        JCTree.JCMethodDecl result = recursiveSetGeneratedBy(
                 treeMaker.MethodDef(
                         treeMaker.Modifiers(access, List.<JCTree.JCAnnotation>nil()),
                         methodName,
@@ -161,20 +163,9 @@ public class HandlePresenceChecker extends JavacAnnotationHandler<PresenceChecke
                 ),
                 source,
                 presenceCheckerField.getContext()
-        );*/
+        );
 
-        JCTree.JCMethodDecl decl = treeMaker.MethodDef(
-                        treeMaker.Modifiers(access, List.<JCTree.JCAnnotation>nil()),
-                        methodName,
-                        methodType,
-                        methodGenericParams,
-                        parameters,
-                        throwsClauses,
-                        methodBody,
-                        annotationMethodDefaultValue
-                );
-
-        return decl;
+        return result;
     }
 
     private JCTree.JCVariableDecl createPresenceCheckerField(JavacNode fieldNode, JavacTreeMaker treeMaker) {

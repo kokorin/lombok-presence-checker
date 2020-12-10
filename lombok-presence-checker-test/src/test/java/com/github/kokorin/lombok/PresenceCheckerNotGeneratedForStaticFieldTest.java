@@ -2,7 +2,7 @@ package com.github.kokorin.lombok;
 
 import org.junit.Test;
 
-public class PresenceCheckerOnStaticFieldHasNoEffectTest {
+public class PresenceCheckerNotGeneratedForStaticFieldTest {
     @PresenceChecker
     private static String name;
 
@@ -11,7 +11,7 @@ public class PresenceCheckerOnStaticFieldHasNoEffectTest {
     }
 
     public static void setName(String name) {
-        PresenceCheckerOnStaticFieldHasNoEffectTest.name = name;
+        PresenceCheckerNotGeneratedForStaticFieldTest.name = name;
     }
 
     @Test(expected = NoSuchMethodException.class)
