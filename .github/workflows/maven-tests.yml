@@ -30,7 +30,7 @@ jobs:
           java-version: ${{ matrix.java-version }}
 
       - name: Initialize
-        run: ./mvnw initialize -B
+        run: bash mvnw initialize -B
 
       - name: Build & Test
-        run: ./mvnw clean install -B
+        run: bash mvnw clean install -B
