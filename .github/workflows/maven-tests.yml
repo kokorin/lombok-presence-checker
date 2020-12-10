@@ -1,0 +1,36 @@
+
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  tests:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        lombok-version: ["1.18.16"]
+        java-version: [7, 8, 11, 14]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java-version }}
+
+      - name: Initialize
+        run: ./mvnw initialize -B
+
+      - name: Build & Test
+        run: ./mvnw clean install -B
