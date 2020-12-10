@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>lombok-presence-checker-parent</artifactId>
-        <groupId>com.github.kokorin</groupId>
+        <groupId>com.github.kokorin.lombok</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -15,25 +15,16 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>provided</scope>
         </dependency>
+
         <dependency>
-            <groupId>com.github.kokorin</groupId>
+            <groupId>com.github.kokorin.lombok</groupId>
             <artifactId>lombok-presence-checker</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <version>1.4.1.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-processor</artifactId>
-            <version>1.4.1.Final</version>
         </dependency>
 
         <dependency>
@@ -50,10 +41,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
                     <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
                         <annotationProcessorPaths>
                             <path>
                                 <groupId>org.projectlombok</groupId>
@@ -61,28 +49,16 @@
                                 <version>${lombok.version}</version>
                             </path>
                             <path>
-                                <groupId>com.github.kokorin</groupId>
+                                <groupId>com.github.kokorin.lombok</groupId>
                                 <artifactId>lombok-presence-checker</artifactId>
                                 <version>0.0.1-SNAPSHOT</version>
                             </path>
                             <path>
                                 <groupId>org.mapstruct</groupId>
                                 <artifactId>mapstruct-processor</artifactId>
-                                <version>1.4.1.Final</version>
+                                <version>${mapstruct.version}</version>
                             </path>
                         </annotationProcessorPaths>
-                        <showWarnings>true</showWarnings>
-                        <compilerArgs>
-                            <compilerArg>
-                                -Amapstruct.suppressGeneratorTimestamp=true
-                            </compilerArg>
-                            <compilerArg>
-                                -Amapstruct.suppressGeneratorVersionInfoComment=true
-                            </compilerArg>
-                            <compilerArg>
-                                -Amapstruct.verbose=true
-                            </compilerArg>
-                        </compilerArgs>
                     </configuration>
                 </plugin>
             </plugins>

@@ -1,11 +1,32 @@
-# lombok-presence-checker
+# @PresenceChecker
+
 Lombok extension which generates Presence Check methods
+
+## Overview
+
+## With Lombok and Lombok-Presence-Checker
+
+```java
+@PresenceChecker
+@Getter
+@Setter
+public static class UserDto {
+    private String name;
+    private long value;
+}
+```
+
+## Vanilla Java
 
 # Build
 
 Some dependencies have to be installed to local Maven repository before compilation
 
-`mvn initialize` This command will download & install
+First initialize everything:
 
-`mvn` To build project
+`mvn initialize`
+
+Then build:
+
+`mvn clean install`
 
