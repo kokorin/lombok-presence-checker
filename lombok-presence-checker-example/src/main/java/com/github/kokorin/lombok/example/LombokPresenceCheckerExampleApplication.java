@@ -1,10 +1,7 @@
 package com.github.kokorin.lombok.example;
 
 import com.github.kokorin.lombok.PresenceChecker;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
@@ -15,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackageClasses = LombokPresenceCheckerExampleApplication.class)
 @EnableWebMvc
 public class LombokPresenceCheckerExampleApplication {
 
@@ -23,7 +20,8 @@ public class LombokPresenceCheckerExampleApplication {
 		SpringApplication.run(LombokPresenceCheckerExampleApplication.class, args);
 	}
 
-	@RestController("user")
+	@RestController
+	@RequestMapping("user")
 	public static class UserRestController {
 		private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 		private final AtomicReference<User> userRef = new AtomicReference<>(
@@ -41,20 +39,23 @@ public class LombokPresenceCheckerExampleApplication {
 			return userDto;
 		}
 
-		@PatchMapping
+		@PutMapping
 		public UserDto updateUser(@RequestBody UserUpdateDto userUpdateDto) {
-			User updatedUser = userRef.updateAndGet(user -> {
-				// MapStruct will update only those fields which were explicitly passed
-				// in HTTP request body
-				userMapper.updateUser(userUpdateDto, user);
-				return user;
+			// MapStruct will update only those fields which were explicitly passed
+			// in HTTP request body
+			User updated = userRef.updateAndGet(user -> {
+				User result = user.toBuilder().build();
+				userMapper.updateUser(userUpdateDto, result);
+				return result;
 			});
 
-			return userMapper.toDto(updatedUser);
+			return userMapper.toDto(updated);
 		}
 	}
 
-	@Data
+	@Getter
+	@Setter
+	@Builder(toBuilder = true)
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class User {
@@ -64,7 +65,8 @@ public class LombokPresenceCheckerExampleApplication {
 		private String nickname;
 	}
 
-	@Data
+	@Getter
+	@Setter
 	public static class UserDto {
 		private String name;
 		private String patronymic;
@@ -72,7 +74,8 @@ public class LombokPresenceCheckerExampleApplication {
 		private String nickname;
 	}
 
-	@Data
+	@Getter
+	@Setter
 	@PresenceChecker
 	public static class UserUpdateDto {
 		private String name;

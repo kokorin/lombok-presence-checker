@@ -13,7 +13,6 @@
         <module>lombok-unshaded</module>
         <module>lombok-presence-checker</module>
         <module>lombok-presence-checker-test</module>
-        <module>lombok-presence-checker-example</module>
     </modules>
 
     <properties>
