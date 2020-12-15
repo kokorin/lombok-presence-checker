@@ -24,8 +24,8 @@ Several strategies can be applied to partial update:
 4. Use JSON mapper for entity partial update with a price of JSON mapper leaking to REST Controller
 5. For every field in DTO add a flag to mark it as present or not
 
-Lombok-presence-checker aims at last strategy. Check REST controller [example](/kokorin/lombok-presence-checker/lombok-presence-checker-example/src/main/java/com/github/kokorin/lombok/example/LombokPresenceCheckerExampleApplication.java)
-and corresponding [tests](/kokorin/lombok-presence-checker/lombok-presence-checker-example/src/test/java/com/github/kokorin/lombok/example/LombokPresenceCheckerExampleApplicationTests.java)
+Lombok-presence-checker aims at last strategy. Check REST controller [example](/lombok-presence-checker-example/src/main/java/com/github/kokorin/lombok/example/LombokPresenceCheckerExampleApplication.java)
+and corresponding [tests](/lombok-presence-checker-example/src/test/java/com/github/kokorin/lombok/example/LombokPresenceCheckerExampleApplicationTests.java)
 
 ## With Lombok and Lombok-Presence-Checker
 
