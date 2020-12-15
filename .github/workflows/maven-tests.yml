@@ -34,3 +34,7 @@ jobs:
 
       - name: Build & Test
         run: bash mvnw clean install -B
+
+      - name: Test Spring Boot Example
+        run:  bash mvnw clean install -B -f lombok-presence-checker-example/pom.xml
+        if: matrix.java-version != 7
