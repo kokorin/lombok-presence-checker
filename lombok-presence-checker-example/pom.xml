@@ -11,7 +11,7 @@
 
 	<groupId>com.github.kokorin.lombok</groupId>
 	<artifactId>lombok-presence-checker-example</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 
 	<description>Lombok Presence Checker example</description>
 
@@ -19,6 +19,8 @@
 		<java.version>1.8</java.version>
 		<lombok.version>1.18.16</lombok.version>
 		<mapstruct.version>1.4.1.Final</mapstruct.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 	<dependencies>
@@ -37,7 +39,7 @@
 		<dependency>
 			<groupId>com.github.kokorin.lombok</groupId>
 			<artifactId>lombok-presence-checker</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.1</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -81,7 +83,7 @@
 						<path>
 							<groupId>com.github.kokorin.lombok</groupId>
 							<artifactId>lombok-presence-checker</artifactId>
-							<version>0.0.1-SNAPSHOT</version>
+							<version>0.0.1</version>
 						</path>
 						<path>
 							<groupId>org.mapstruct</groupId>

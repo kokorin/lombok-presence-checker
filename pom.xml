@@ -7,7 +7,40 @@
     <groupId>com.github.kokorin.lombok</groupId>
     <artifactId>lombok-presence-checker-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
+
+    <name>lombok-presence-checker</name>
+    <description>Java ffmpeg command-line wrapper.</description>
+    <url>https://github.com/kokorin/lombok-presence-checker</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Denis Kokorin</name>
+            <email>kokorin86@gmail.com</email>
+            <url>https://github.com/kokorin</url>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git://github.com/kokorin/lombok-presence-checker.git</connection>
+        <developerConnection>scm:git:ssh://github.com/kokorin/lombok-presence-checker.git</developerConnection>
+        <url>http://github.com/kokorin/lombok-presence-checker/tree/main</url>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <modules>
         <module>lombok-unshaded</module>
@@ -18,6 +51,8 @@
     <properties>
         <lombok.version>1.18.16</lombok.version>
         <mapstruct.version>1.4.1.Final</mapstruct.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencyManagement>
@@ -32,7 +67,7 @@
             <dependency>
                 <groupId>com.github.kokorin.lombok</groupId>
                 <artifactId>lombok-presence-checker</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>0.0.1</version>
                 <scope>provided</scope>
             </dependency>
 

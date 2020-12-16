@@ -2,6 +2,16 @@
 
 Lombok extension which generates Presence Checker methods
 
+## Tested with the help of [GitHub Actions](/.github/workflows/maven-tests.yml) 
+
+![Tests](https://github.com/kokorin/lombok-presence-checker/workflows/Tests/badge.svg)
+
+**JDK**: 7, 8, 11, 14
+
+# Usage 
+
+TO BE DONE
+
 ## Overview
 
 You can annotate any field or type with `@PresenceChecker`, to let lombok together with lombok-presence-checker
