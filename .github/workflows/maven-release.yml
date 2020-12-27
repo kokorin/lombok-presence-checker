@@ -40,8 +40,11 @@ jobs:
           gpg --import .gpg/private_key.gpg
           rm -rf .gpg
 
+      - name: Initialize
+        run: bash mvnw -B initialize
+
+      - name: Install
+        run: bash mvnw -B clean install
+
       - name: Release
-        run: |
-          bash mvnw -B initialize
-          bash mvnw -B clean install
-          bash mvnw -B clean deploy -pl lombok-presence-checker -Prelease
+        run: bash mvnw -B clean deploy -pl lombok-presence-checker -Prelease
