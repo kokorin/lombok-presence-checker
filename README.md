@@ -10,7 +10,59 @@ Lombok extension which generates Presence Checker methods
 
 # Usage 
 
-TO BE DONE
+![Maven Central](https://img.shields.io/maven-central/v/com.github.kokorin.lombok/lombok-presence-checker?style=for-the-badge)
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+        <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>com.github.kokorin.lombok</groupId>
+        <artifactId>lombok-presence-checker</artifactId>
+        <version>0.0.1</version>
+        <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct</artifactId>
+        <version>${mapstruct.version}</version>
+    </dependency>
+</dependencies>
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                        <version>${lombok.version}</version>
+                    </path>
+                    <path>
+                        <groupId>com.github.kokorin.lombok</groupId>
+                        <artifactId>lombok-presence-checker</artifactId>
+                        <version>0.0.1</version>
+                    </path>
+                    <path>
+                        <groupId>org.mapstruct</groupId>
+                        <artifactId>mapstruct-processor</artifactId>
+                        <version>${mapstruct.version}</version>
+                    </path>
+                </annotationProcessorPaths>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
 
 ## Overview
 
@@ -25,7 +77,7 @@ object. Without presence checkers MapStruct by default updates only fields with 
 
 ### REST & Partial Updates
  
-After incoming request body get parsed in a typed object in a REST controller one can't distinguish absent property from property with null value.
+After incoming request body get parsed in a typed object in a REST controller one can't distinguish absent property from a property with null value.
 
 Several strategies can be applied to partial update:
 1. Treat any DTO property with null value as absent property and *do not* set corresponding entity property to null
@@ -34,7 +86,7 @@ Several strategies can be applied to partial update:
 4. Use JSON mapper for entity partial update with a price of JSON mapper leaking to REST Controller
 5. For every field in DTO add a flag to mark it as present or not
 
-Lombok-presence-checker aims at last strategy. Check REST controller [example](/lombok-presence-checker-example/src/main/java/com/github/kokorin/lombok/example/LombokPresenceCheckerExampleApplication.java)
+Lombok-presence-checker aims at the last strategy. Check REST controller [example](/lombok-presence-checker-example/src/main/java/com/github/kokorin/lombok/example/LombokPresenceCheckerExampleApplication.java)
 and corresponding [tests](/lombok-presence-checker-example/src/test/java/com/github/kokorin/lombok/example/LombokPresenceCheckerExampleApplicationTests.java)
 
 ## With Lombok and Lombok-Presence-Checker

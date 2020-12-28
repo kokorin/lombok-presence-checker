@@ -10,7 +10,7 @@
     <version>0.0.1</version>
 
     <name>lombok-presence-checker</name>
-    <description>Java ffmpeg command-line wrapper.</description>
+    <description>Lombok extension which generates Presence Checker methods</description>
     <url>https://github.com/kokorin/lombok-presence-checker</url>
     <licenses>
         <license>
