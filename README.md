@@ -172,3 +172,8 @@ Then build:
 
 `mvn clean install`
 
+## IntelliJ IDEA
+
+This project uses [maven-git-versioning-extension](https://github.com/qoomon/maven-git-versioning-extension)
+to set project version automatically.
+Check its [intellij-setup](https://github.com/qoomon/maven-git-versioning-extension#intellij-setup) documentation.
