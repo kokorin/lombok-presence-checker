@@ -11,7 +11,7 @@
 
 	<groupId>com.github.kokorin.lombok</groupId>
 	<artifactId>lombok-presence-checker-example</artifactId>
-	<version>0.0.1</version>
+	<version>0</version>
 
 	<description>Lombok Presence Checker example</description>
 

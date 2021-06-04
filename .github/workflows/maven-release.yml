@@ -2,9 +2,9 @@
 name: Release
 
 on:
-  release:
-    types:
-      - released
+  push:
+    branches:
+      - main
 
 jobs:
   release:
@@ -15,9 +15,22 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
+          distribution: 'adopt'
           java-version: 7
+
+      - name: Cache Maven Packages
+        uses: actions/cache@v2
+        with:
+          # be careful not to include ~/.m2/settings.xml which contains credentials
+          path: |
+            ~/.m2/repository
+            ~/.m2/wrapper
+          key: m2-release-${{ hashFiles('**/pom.xml', '.mvn/*.xml') }}
+          restore-keys: |
+            m2-release
+            m2
 
       - name: Set up Maven settings.xml to access Sonatype Nexus
         run: |
