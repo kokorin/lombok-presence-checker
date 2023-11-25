@@ -4,7 +4,7 @@ name: Release
 on:
   release:
     types:
-      - released
+      - published
 
 jobs:
   release:
@@ -12,12 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
-          java-version: 7
+          distribution: 'adopt'
+          java-version: 8
 
       - name: Set up Maven settings.xml to access Sonatype Nexus
         run: |
@@ -47,4 +48,4 @@ jobs:
         run: bash mvnw -B clean install
 
       - name: Release
-        run: bash mvnw -B clean deploy -pl lombok-presence-checker -Prelease
+        run: bash mvnw -B clean deploy -Prelease
