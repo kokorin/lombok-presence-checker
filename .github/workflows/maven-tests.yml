@@ -33,7 +33,7 @@ jobs:
       - name: Initialize
         run: bash mvnw initialize -B
 
-      - name: Build & Test
+      - name: Build
         run: bash mvnw clean install -B
 
       - name: Test Spring Boot Example

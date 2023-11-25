@@ -48,4 +48,4 @@ jobs:
         run: bash mvnw -B clean install
 
       - name: Release
-        run: bash mvnw -B clean deploy -Prelease
+        run: bash mvnw -B clean deploy -Prelease -pl '!lombok-unshaded'

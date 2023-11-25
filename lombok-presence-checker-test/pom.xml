@@ -5,7 +5,7 @@
     <parent>
         <artifactId>lombok-presence-checker-parent</artifactId>
         <groupId>com.github.kokorin.lombok</groupId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -36,6 +36,15 @@
     </dependencies>
 
     <build>
+        <plugins> 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -51,7 +60,7 @@
                             <path>
                                 <groupId>com.github.kokorin.lombok</groupId>
                                 <artifactId>lombok-presence-checker</artifactId>
-                                <version>0.0.2-SNAPSHOT</version>
+                                <version>0.0.2</version>
                             </path>
                             <path>
                                 <groupId>org.mapstruct</groupId>

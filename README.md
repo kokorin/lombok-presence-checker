@@ -24,7 +24,7 @@ Lombok extension which generates Presence Checker methods
     <dependency>
         <groupId>com.github.kokorin.lombok</groupId>
         <artifactId>lombok-presence-checker</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.2</version>
         <scope>provided</scope>
     </dependency>
     
@@ -50,7 +50,7 @@ Lombok extension which generates Presence Checker methods
                     <path>
                         <groupId>com.github.kokorin.lombok</groupId>
                         <artifactId>lombok-presence-checker</artifactId>
-                        <version>0.0.2-SNAPSHOT</version>
+                        <version>0.0.2</version>
                     </path>
                     <path>
                         <groupId>org.mapstruct</groupId>

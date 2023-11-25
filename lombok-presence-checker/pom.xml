@@ -3,9 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>lombok-presence-checker-parent</artifactId>
         <groupId>com.github.kokorin.lombok</groupId>
-        <version>0.0.2-SNAPSHOT</version>
+        <artifactId>lombok-presence-checker-parent</artifactId>
+        <version>0.0.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -27,7 +27,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.projectlombok</groupId>
+            <groupId>com.github.kokorin.lombok</groupId>
             <artifactId>lombok-unshaded</artifactId>
             <version>${lombok.version}</version>
             <optional>true</optional>
